@@ -1,4 +1,4 @@
-{{define "bootstrap"}}}
+{{define "bootstrap"}}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -8,6 +8,7 @@ href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 rel="stylesheet">
 	</head>
 	<body>
+		{{template "navbar"}}
 		<div class="container-fluid">
 			{{template "yield"}}
 		</div>
