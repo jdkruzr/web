@@ -1,1 +1,6 @@
+{{define "yield"}}
+
 <h1>Welcome!</h1>
+
+{{template "footer"}}
+{{end}}
