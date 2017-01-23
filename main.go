@@ -1,7 +1,7 @@
 package main
 
 import (
-	// "fmt"
+	"fmt"
 	"net/http"
 	"github.com/gorilla/mux"
 	"github.com/jdkruzr/web/views"
@@ -10,20 +10,27 @@ import (
 var homeView *views.View
 var contactView *views.View
 var faqView *views.View
+var signUpView *views.View
 
 func home(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	homeView.Template.ExecuteTemplate(w, homeView.Layout, nil)
+	fmt.Println(homeView.Layout)
+	homeView.Render(w, nil)
 }
 
 func contact(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	contactView.Template.ExecuteTemplate(w, contactView.Layout, nil)
+	contactView.Render(w, nil)
 }
 
 func faq(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	faqView.Template.ExecuteTemplate(w, faqView.Layout, nil)
+	faqView.Render(w, nil)
+}
+
+func signup(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	signUpView.Render(w, nil)
 }
 
 func main() {
@@ -36,10 +43,13 @@ func main() {
 	
 	faqView = views.NewView("bootstrap", "views/faq.gtpl")
 	
+	signUpView = views.NewView("bootstrap", "views/signup.gtpl")
+	
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", home)
 	r.HandleFunc("/contact", contact)
 	r.HandleFunc("/faq", faq)
+	r.HandleFunc("/signup", signup)
 	http.ListenAndServe(":3000", r)
 }

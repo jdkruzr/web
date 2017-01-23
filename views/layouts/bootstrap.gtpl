@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>UseGolang.com</title>
+		<title>Reticulum Technology</title>
 		<link
 href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 rel="stylesheet">
@@ -11,6 +11,8 @@ rel="stylesheet">
 		{{template "navbar"}}
 		<div class="container-fluid">
 			{{template "yield"}}
+			
+			{{template "footer"}}
 		</div>
 
 		<!-- jquery & Bootstrap JS -->
