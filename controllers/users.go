@@ -1,9 +1,11 @@
 package controllers
 
+import "github.com/jdkruzr/web/views"
+
 func NewUsers() *Users {
-	return &Users(
+	return &Users{
 		NewView: views.NewView("bootstrap", "views/users/new.gtpl"),
-	)
+	}
 }
 
 type Users struct {
