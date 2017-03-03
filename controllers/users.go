@@ -1,11 +1,25 @@
 package controllers
 
 import "github.com/jdkruzr/web/views"
+import "net/http"
+import "fmt"
 
+// Get me the "make a new user" page!
+// GET /signup
 func NewUsers() *Users {
 	return &Users{
 		NewView: views.NewView("bootstrap", "views/users/new.gtpl"),
 	}
+}
+
+// Now take that info and make a new user!
+// POST /signup
+func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
+	if err := r.ParseForm(); err != nil {
+		panic(err)
+	}
+	fmt.Fprintln(w, r.PostForm["email"])
+	fmt.Fprintln(w, r.PostForm["password"])
 }
 
 type Users struct {
