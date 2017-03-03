@@ -15,11 +15,20 @@ func NewUsers() *Users {
 // Now take that info and make a new user!
 // POST /signup
 func (u *Users) Create(w http.ResponseWriter, r *http.Request) {
-	if err := r.ParseForm(); err != nil {
+	form := SignupForm{}
+	if err := parseForm(r, &form); err != nil {
 		panic(err)
 	}
-	fmt.Fprintln(w, r.PostForm["email"])
-	fmt.Fprintln(w, r.PostForm["password"])
+	fmt.Fprintln(w, "Email is ", form.Email)
+	fmt.Fprintln(w, "Password is ", form.Password)
+}
+
+
+// This lets gorilla/schema work
+
+type SignupForm struct {
+	Email	string `schema:"email"`
+	Password string `schema:"password"`
 }
 
 type Users struct {
