@@ -38,20 +38,22 @@ func main() {
 
 	// var err error
 	
-	homeView = views.NewView("bootstrap", "views/home.gtpl")
+//	homeView = views.NewView("bootstrap", "views/home.gtpl")
 	
-	contactView = views.NewView("bootstrap", "views/contact.gtpl")
+//	contactView = views.NewView("bootstrap", "views/contact.gtpl")
 	
-	faqView = views.NewView("bootstrap", "views/faq.gtpl")
+//	faqView = views.NewView("bootstrap", "views/faq.gtpl")
 	
+
 	// signUpView = views.NewView("bootstrap", "views/signup.gtpl")
-	usersC := controllers.NewUsers()
+	staticC := controllers.NewStatic()
+  usersC := controllers.NewUsers()
 	
 	r := mux.NewRouter()
 
-	r.HandleFunc("/", home).Methods("GET")
-	r.HandleFunc("/contact", contact).Methods("GET")
-	r.HandleFunc("/faq", faq).Methods("GET")
+	r.Handle("/", staticC.Home).Methods("GET")
+	r.Handle("/contact", staticC.Contact).Methods("GET")
+	r.Handle("/faq", staticC.Faq).Methods("GET")
 	r.HandleFunc("/signup", usersC.New).Methods("GET") // we are not calling the "New" method here, we're passing the method as an argument to the r.HandleFunc() call.
 	r.HandleFunc("/signup", usersC.Create).Methods("POST")
 	http.ListenAndServe(":3000", r)

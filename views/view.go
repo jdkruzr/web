@@ -14,9 +14,9 @@ type View struct {
 // What directory does our layout live in?
 var LayoutDir string = "views/layouts"
 
-func (v *View) Render(w http.ResponseWriter, data interface{}) error {
-	return v.Template.ExecuteTemplate(w, v.Layout, data)
-}
+//func (v *View) Render(w http.ResponseWriter, data interface{}) error {
+//	return v.Template.ExecuteTemplate(w, v.Layout, data)
+//}
 
 // Build a glob of all the template files for presentation to 
 // the View "constructor"
