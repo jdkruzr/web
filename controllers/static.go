@@ -4,9 +4,9 @@ import "github.com/jdkruzr/web/views"
 
 func NewStatic() *Static {
 	return &Static{
-		Home: views.NewView("bootstrap", "views/static/home.gtpl"),
-		Contact: views.NewView("bootstrap", "views/static/contact.gtpl"),
-		Faq: views.NewView("bootstrap", "views/static/faq.gtpl"),
+		Home: views.NewView("bootstrap", "static/home"), // We used to have "views" and "gtpl" here, recall
+		Contact: views.NewView("bootstrap", "static/contact"),
+		Faq: views.NewView("bootstrap", "static/faq"),
 	}
 }
 

@@ -8,7 +8,7 @@ import "fmt"
 // GET /signup
 func NewUsers() *Users {
 	return &Users{
-		NewView: views.NewView("bootstrap", "views/users/new.gtpl"),
+		NewView: views.NewView("bootstrap", "users/new"),
 	}
 }
 
