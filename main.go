@@ -47,7 +47,8 @@ func main() {
 
 	// signUpView = views.NewView("bootstrap", "views/signup.gtpl")
 	staticC := controllers.NewStatic()
-  usersC := controllers.NewUsers()
+    usersC := controllers.NewUsers()
+    galleriesC := controllers.NewGalleries()
 	
 	r := mux.NewRouter()
 
@@ -56,5 +57,6 @@ func main() {
 	r.Handle("/faq", staticC.Faq).Methods("GET")
 	r.HandleFunc("/signup", usersC.New).Methods("GET") // we are not calling the "New" method here, we're passing the method as an argument to the r.HandleFunc() call.
 	r.HandleFunc("/signup", usersC.Create).Methods("POST")
+	r.HandleFunc("/galleries/new", galleriesC.New).Methods("GET")
 	http.ListenAndServe(":3000", r)
 }
