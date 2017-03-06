@@ -20,5 +20,6 @@ func NewGalleries() *Galleries {
 }
 
 func (g *Galleries) New(w http.ResponseWriter, r *http.Request) {
-	g.NewView.Render(w, nil)
+	fmt.Fprintln(w, "zomg")
+	//g.NewView.Render(w, nil)
 }
