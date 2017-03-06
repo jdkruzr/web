@@ -18,7 +18,7 @@ type View struct {
 
 func addViewsDirPrefix(files []string) {
 	for i, f := range files {
-		files[i] = ViewDir + "/" + f
+		files[i] = ViewsDir + "/" + f
 	}
 }
 
