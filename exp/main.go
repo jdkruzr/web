@@ -20,7 +20,8 @@ const (
 type User struct {
 	gorm.Model
 	Name	string
-	Email	string `gorm:"unique_index"`
+	Email	string `gorm:"not null;unique_index"`
+  Orders []Order
 }
 
 type Order struct {
@@ -59,14 +60,18 @@ func main() {
 	// name, email := getInfo()
 	
 	var user User
-	db.First(&user)
+	db.Preload("Orders").First(&user)
 	if db.Error != nil {
 	  panic(db.Error)
 	}
 	
-  createOrder(db, user, 1001, "Fake Description #1")
-  createOrder(db, user, 9999, "Fake Description #2")
-  createOrder(db, user, 8800, "Fake Description #3")
-	
+  //createOrder(db, user, 1001, "Fake Description #1")
+  //createOrder(db, user, 9999, "Fake Description #2")
+  //createOrder(db, user, 8800, "Fake Description #3")
+
+  fmt.Println("Email:", user.Email)
+  fmt.Println("Number of orders:", len(user.Orders))
+  fmt.Println("Orders:", user.Orders)
+
 	fmt.Printf("%+v\n", user)
 }
