@@ -14,9 +14,9 @@ type User struct {
 type UserService interface {
   ByID(id uint) *User
   ByEmail(email string) *User
-  Create(user *User)
-  Update(user *User)
-  Delete(id uint)
+  Create(user *User) error
+  Update(user *User) error
+  Delete(id uint) error
 }
 
 type UserGorm struct {
@@ -28,23 +28,41 @@ func NewUserGorm(connectionInfo string) (*UserGorm, error) {
   if err != nil {
     return nil, err
   }
-  return &UserGorm(db), nil
+  return &UserGorm{db}, nil
 }
 
 func (ug *UserGorm) ByID(id uint) *User {
-  return nil
+  ret := &User{}
+  err := ug.DB.First(ret, id).Error
+  switch err {
+  case nil:
+    return ret
+  case gorm.ErrRecordNotFound:
+    return nil
+  default:
+    panic (err)
+  }
 }
 
 func (ug *UserGorm) ByEmail(email string) *User {
+  return nil
 }
 
-func (ug *UserGorm) Create(user *User) {
+func (ug *UserGorm) Create(user *User) error {
+  return ug.DB.Create(user).Error
 }
 
 func (ug *UserGorm) Update(user *User) {
+  return nil
 }
 
 func (ug *UserGorm) Delete(id uint) {
+  return nil
 }
 
+// We'll get rid of this in production.
+func (ug *UserGorm) DestructiveReset() {
+  ug.DropTableIfExists(&User{})
+  ug.AutoMigrate(&User{})
+}
 
