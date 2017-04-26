@@ -1,6 +1,7 @@
 package controllers
 
 import "github.com/jdkruzr/web/views"
+import "github.com/jdkruzr/web/controllers"
 import "net/http"
 import "fmt"
 
@@ -9,6 +10,7 @@ import "fmt"
 func NewUsers() *Users {
 	return &Users{
 		NewView: views.NewView("bootstrap", "users/new"),
+		UserService:	us,
 	}
 }
 
@@ -33,6 +35,7 @@ type SignupForm struct {
 
 type Users struct {
 	NewView *views.View
+	models.UserService
 }
 
 func (u *Users) New(w http.ResponseWriter, r *http.Request) {
